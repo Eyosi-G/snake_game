@@ -1,7 +1,20 @@
 const snake = document.getElementById("snake");
+const message = document.getElementById("message");
+const resetButton = document.getElementById("reset");
+const scoreElement = document.getElementById("score");
 let snakePosition = [0, 1, 2, 3];
 let fruitPosition = 50;
 let isGameOver = false;
+let score = 0;
+
+const resetButtonHandler = () => {
+  isGameOver = false;
+  snakePosition = [0];
+  fruitPosition = 50;
+  resetButton.setAttribute("style", "display:none;");
+  scoreElement.innerText = "score 0";
+  redrawPosition();
+};
 
 const createGridItem = (isOdd) => {
   const gridItem = document.createElement("div");
@@ -59,16 +72,20 @@ const moveSnake = (bySize) => {
 
   if (eatFruit()) {
     // place random fruit
+    // grow
     placeRandomFruit();
     drawFruit();
+    score += 10;
+    scoreElement.innerText = `score  ${score}`;
     return;
-    // grow
   }
 
   snakePosition.shift();
 
   if (touchItSelf()) {
     isGameOver = true;
+    message.innerText = "game over !!";
+    resetButton.setAttribute("style", "display:button;");
     return;
   }
 };
@@ -89,6 +106,7 @@ const removeGrids = () => {
     grid.parentNode.removeChild(grid);
   });
 };
+
 const moveSnakeEventHandler = () => {
   document.addEventListener("keydown", (e) => {
     if (!isGameOver) {
@@ -115,3 +133,4 @@ createGrid(400, 40);
 drawFruit();
 positionSnake();
 moveSnakeEventHandler();
+resetButton.addEventListener("click", resetButtonHandler);
