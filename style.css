@@ -1,0 +1,36 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+#container {
+  position: relative;
+  display: grid;
+  width: 400px;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+  column-gap: 2px;
+  row-gap: 2px;
+}
+
+.snake_block {
+  height: 40px;
+  width: 40px;
+  background-color: red;
+}
+
+.fruit {
+  height: 40px;
+  width: 40px;
+  background-color: green;
+}
+
+.grid_item_red {
+  background-color: aquamarine;
+  height: 40px;
+  width: 40px;
+}
+.grid_item_white {
+  background-color: beige;
+  height: 40px;
+  width: 40px;
+}
